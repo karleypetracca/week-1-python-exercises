@@ -34,7 +34,7 @@ menu = {
 T1_guest1 = ["Egg Benedict", "Coffee"]
 T1_guest2 = ["Biscuit and Gravy", "Coffee"]
 T1_guest3 = ["Steak and Eggs", "Soft Drink"]
-T1 = [T1_guest1, T1_guest2, T1_guest3]
+T1 = {"Guest 1": T1_guest1, "Guest 2": T1_guest2, "Guest 3": T1_guest3}
 
 
 # Table 2 order
@@ -42,13 +42,15 @@ T2_guest1 = ["Steak Salad", "Soft Drink"]
 T2_guest2 = ["Soup of the Day", "Chicken Wrap", "Water"]
 T2_guest3 = ["Chicken Fingers", "Soft Drink"]
 T2_all = ["Chef Special"]
-T2 = [T2_guest1, T2_guest2, T2_guest3, T2_all]
+T2 = {"Guest 1": T2_guest1, "Guest 2": T2_guest2, "Guest 3": T2_guest3, "Table": T2_all}
 
 
 # Function receipt print-out
 def print_receipt(table_order):
+    print("*" * 25)
     subtotal = 0
-    for order in table_order:
+    for guest, order in table_order.items():
+        print ("*** {} ***".format(guest))
         for value in order:
             if menu["Brunch"].get(value, 0) != 0:
                 subtotal += menu["Brunch"][value]
@@ -56,18 +58,23 @@ def print_receipt(table_order):
             if menu["Drinks"].get(value, 0) != 0:
                 subtotal += menu["Drinks"][value]
                 print("{:<25} $ {:>6,.2f}".format(value + ":", menu["Drinks"].get(value)))
+            if value == "Water":
+                print("{:<25} $ {:>6}".format(value + ":", "0.00"))
             if menu["Specials"].get(value, 0) != 0:
                 subtotal += menu["Specials"][value]
                 print("{:<25} $ {:>6,.2f}".format(value + ":", menu["Specials"].get(value)))
+        print()
     
     tax = subtotal * 0.07
     total = subtotal + tax
 
     print()
-    print("{:<19}Price: $ {:>6,.2f}".format("", total))
+    print("{:<19}Price: $ {:>6,.2f}".format("", subtotal))
     print("{:<19}Taxes: $ {:>6,.2f}".format("", tax))
     print("{:<19}Total: $ {:>6,.2f}".format("", total))
 
+    print()
+    print()
     print("**Suggested Tip**")
     print(" Tip 25%:  ${:>6,.2f}".format(total * 0.25))
     print(" Tip 20%:  ${:>6,.2f}".format(total * 0.20))

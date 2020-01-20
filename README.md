@@ -53,3 +53,6 @@
 * **dict-letter-summary.py:** Prompts user for word and prints dictionary containing tally of how many times each letter in alphabet was used in the word
 * **dict-word-summary.py:** Prompts user for sentence and prints dictionary containing tally of how many times each word was used in the sentence
 * **(BONUS) dict-top-3-words.py:** Prompts user for sentence and prints dictionary containing top three words used
+
+*(added 2020-01-20)*
+* **restuarant-exercise.py:** Takes items ordered, calculates suggested tip and tax, and prints receipt with totals (no user input)
